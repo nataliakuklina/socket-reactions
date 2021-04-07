@@ -16,12 +16,8 @@ const reactions = new Set([
 io.on('connection', (socket) => {
   console.log(`New connection: ${socket.id}`);
 
-  socket.on('reaction', ({ code }) => {
-    if (!reactions.has(code)) {
-      return;
-    }
-
-    socket.broadcast.emit('reaction', code);
+  socket.on('reaction', (data) => {
+    socket.broadcast.emit('reaction', data);
   });
 });
 
